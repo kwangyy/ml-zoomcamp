@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-deployment #deployment name
+spec:
+  replicas: 1 # how many pods we want to create
+  selector: # all pods with the app 'ping' belongs to this deployment
+    matchLabels:
+      app: ping
+  template: # template for each pod
+    metadata:
+      labels:
+        app: ping #each pod gets label, app = 'ping'
+    spec: #specification for each pod
+      containers:
+      - name: ping-pod #pod name -- sometimes the deployment and pod name are the same, but sometimes different
+        image: ping:v001
+        resources:
+            limits:
+                memory: "128Mi"
+                cpu: "0.5" # more than 50%
+        ports:
+        - containerPort: 9696

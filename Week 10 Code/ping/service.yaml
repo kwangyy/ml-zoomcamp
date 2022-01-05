@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata: #name of service
+    name: ping
+spec:
+    type: LoadBalancer
+    selector: # which pods qualify for forwarding requests
+        app: ping
+    ports:
+    - port: 80
+      targetPort: 9696
